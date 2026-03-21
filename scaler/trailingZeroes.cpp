@@ -1,0 +1,9 @@
+int Solution::trailingZeroes(int A) {
+    int c = 0;
+    // count number of 5 in factors
+    for(int i = 5; A / i >= 1; i *= 5) {
+        c += A / i;
+    }
+  
+    return c;
+}
