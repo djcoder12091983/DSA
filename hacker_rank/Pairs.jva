@@ -1,0 +1,87 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    // binary search start to end
+    static boolean search(int[] arr, int k, int start) {
+        int s = start;
+        int e = arr.length - 1;
+        while(s <= e) {
+            int mid = (s + e) / 2;
+            if(arr[mid] == k) {
+                // found
+                return true;
+            } else if(arr[mid] > k) {
+                // left side
+                e = mid - 1;
+            } else {
+                // right side
+                s = mid + 1;
+            }
+        }
+
+        return false; // not found
+    }
+
+    // Complete the pairs function below.
+    static int pairs(int k, int[] arr) {
+        // sort elements
+        Arrays.sort(arr);
+
+        // for each element try to find pair
+        int c = 0;
+        int l = arr.length;
+        for(int i = 0; i < l; i++) {
+            int a = arr[i];
+            // required element to pair
+            int required = a + k;
+
+            // binary search on right side
+            boolean f = search(arr, required, i + 1);
+            if(f) {
+                // note all elements are distinct
+                // only one pair possible
+                c++;
+            }
+        }
+
+        return c;
+    }
+
+    private static final Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws IOException {
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(System.getenv("OUTPUT_PATH")));
+
+        String[] nk = scanner.nextLine().split(" ");
+
+        int n = Integer.parseInt(nk[0]);
+
+        int k = Integer.parseInt(nk[1]);
+
+        int[] arr = new int[n];
+
+        String[] arrItems = scanner.nextLine().split(" ");
+        scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
+
+        for (int i = 0; i < n; i++) {
+            int arrItem = Integer.parseInt(arrItems[i]);
+            arr[i] = arrItem;
+        }
+
+        int result = pairs(k, arr);
+
+        bufferedWriter.write(String.valueOf(result));
+        bufferedWriter.newLine();
+
+        bufferedWriter.close();
+
+        scanner.close();
+    }
+}
