@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Arrays;
 
-class StronglyConnectedComponetsTarjan {
+class StronglyConnectedComponentsTarjan {
 
     // DFS based function used by getSCCs()
     // u vertex to be visited next

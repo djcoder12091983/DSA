@@ -1,4 +1,4 @@
-public class StronglyConnectedComponetsKosaRaju {
+public class StronglyConnectedComponentsKosaRaju {
 
     // dfs Function to reach destination
     boolean dfs(int curr, int des, int[][] adj, int[] vis, int n) {
